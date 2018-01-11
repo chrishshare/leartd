@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}爱链{% endblock %}
+{% block content %}
+
+    {% if username %}
+        <div class="search-form container-fluid">
+            <form class="form-horizontal search-from" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="classify-code">URL分类</label>
+                    <select class="classify-code input-sm" name="type-code">
+                    </select>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="url-name" class="input-group-sm">地址名称：</label>
+                    <input type="text" class="input-group-sm url-name  input-sm" name="url-name" placeholder="请输入地址名称">
+                    <button type="button" class="btn-sm btn-primary search" onclick="getUrlsByPostMethod()">查询</button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <hr>
+        <div class="row">
+
+
+        </div>
+
+        <div class="modal fade" id="addurl" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modaltitle">增加URL</h4>
+                    </div>
+                    <div class="modal-body" style="padding-left: 10%">
+                        <form class="form-inline form-group-lg add-from">{% csrf_token %}
+                            <div>
+                                <label for="url-link">URL地址:</label>
+                                <input type="url" class="url-link input-sm" name="urllink" placeholder=" 请输入URL地址"
+                                       required maxlength="200" style="width: 70%">
+                            </div>
+                            <div>
+                                <label for="url-name">URL名称:</label>
+                                <input type="url" class="url-name input-sm" name="urlname" placeholder=" 请输入地址名称"
+                                       required maxlength="100" style="width: 70%">
+                            </div>
+                            <div>
+                                <label for="url-type">URL分类:</label>
+                                <select required class="input-sm url-type" name="urltype" style="width: 70%">
+                                    <option value="">请选择</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="remark">备&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp注:</label>
+                                <textarea class="remark input-sm" name="remark" placeholder=" 请输入备注" rows="7"
+                                          style="width: 70%" maxlength="500"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary add-url-btn" onclick="addUrl()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addclassify" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modaltitle">增加地址分类</h4>
+                    </div>
+                    <div class="modal-body" style="padding-left: 10%">
+                        <form class="form-inline form-group-lg add-from">{% csrf_token %}
+                            <div>
+                                <label for="type-code">分类编码:</label>
+                                <input type="url" class="type-code input-sm" name="typecode" placeholder=" 请输入URL分类编码"
+                                       required maxlength="20" style="width: 70%">
+                            </div>
+                            <div>
+                                <label for="type-name">分类名称:</label>
+                                <input type="url" class="type-name input-sm" name="typename" placeholder=" 请输入URL分类名称"
+                                       required maxlength="40" style="width: 70%">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary add-classify-btn" onclick="addClassify()">提交
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-bar">
+            <div>
+                <button type="button" class="btn-sm btn-primary add-url" data-toggle="modal" data-target="#addclassify">
+                    增加分类
+                </button>
+            </div>
+            <div>
+                <button type="button" class="btn-sm btn-primary add-url" data-toggle="modal" data-target="#addurl">
+                    增加URL
+                </button>
+            </div>
+            <div class="return-top">
+                <img src="{% static 'icon/top.png' %}" class="back-to-top-img">
+
+            </div>
+
+        </div>
+    {% else %}
+        <h3 class="col-sm-3">请先登陆</h3>
+    {% endif %}
+
+
+    <script>
+
+        $.ajax({
+            type: 'get',
+            url: '{% url 'geturls' %}',
+            success: function (data) {
+                html = '';
+                $.each(JSON.parse(data), function (index, content) {
+                    html += '<div class="col-sm-3 urls">' +
+                        '<div class="panel panel-primary">' +
+                        '<div class="panel-heading">' + content.classify__type_name + '</div>' +
+                        '<div class="panel-body"><a href="' + content.url_link + '" target="_blank">' + content.url_name + '</a></div>' +
+                        '<div class="panel-footer"><p><img class="edit" src="{% static 'icon/edit16.png' %}" data-toggle="modal" data-target="#editurl">'+
+                        '<img class="delete" src="{% static 'icon/delete16.png' %}"></p></div></div></div>';
+                });
+                $('.row').html(html);
+                waterfall();
+            },
+        });
+
+        $.ajax({
+            type: 'get',
+            url: '{% url 'getclassify' %}',
+            success: function (data) {
+                html = '<option value="">请选择</option>';
+                $.each(JSON.parse(data), function (index, content) {
+                    html += ' <option value="' + content.type_code + '">' +
+                        content.type_name + '</option>';
+                });
+                $('.classify-code').html(html);
+            },
+        });
+
+        $.ajax({
+            type: 'get',
+            url: '{% url 'getclassify' %}',
+            success: function (data) {
+                html = '<option value="">请选择</option>';
+                $.each(JSON.parse(data), function (index, content) {
+                    html += ' <option value="' + content.type_code + '">' +
+                        content.type_name + '</option>';
+                });
+                $('.url-type').html(html);
+            },
+        });
+
+        function getClassify() {
+            $.ajax({
+                type: 'get',
+                url: '{% url 'getclassify' %}',
+                success: function (data) {
+                    html = '<option value="">请选择</option>';
+                    $.each(JSON.parse(data), function (index, content) {
+                        html += ' <option value="' + content.type_code + '">' +
+                            content.type_name + '</option>';
+                    });
+                    $('.classify-code').html(html);
+                },
+            });
+        };
+
+        function getClassify2() {
+            $.ajax({
+                type: 'get',
+                url: '{% url 'getclassify' %}',
+                success: function (data) {
+                    html = '<option value="">请选择</option>';
+                    $.each(JSON.parse(data), function (index, content) {
+                        html += ' <option value="' + content.type_code + '">' +
+                            content.type_name + '</option>';
+                    });
+                    $('.url-type').html(html);
+                },
+            });
+        };
+
+        function getUrlsByGetMethod() {
+            $.ajax({
+                type: 'get',
+                url: '{% url 'geturls' %}',
+                success: function (data) {
+                    html = '';
+                    $.each(JSON.parse(data), function (index, content) {
+                        html += '<div class="col-sm-3 urls">' +
+                            '<div class="panel panel-primary">' +
+                            '<div class="panel-heading">' + content.classify__type_name + '</div>' +
+                            '<div class="panel-body"><a href="' + content.url_link + '" target="_blank">' + content.url_name + '</a></div>' +
+                            '<div class="panel-footer"><p><img class="edit" src="{% static 'icon/edit16.png' %}" data-toggle="modal" data-target="#editurl">'+
+                            '<img class="delete" src="{% static 'icon/delete16.png' %}"></p></div></div></div>';
+                    });
+                    $('.row').html(html);
+                    waterfall();
+                },
+            });
+        };
+
+        function getUrlsByPostMethod() {
+                $.ajax({
+                    type: 'post',
+                    url: '{% url 'geturls' %}',
+                    data: $('.search-from').serialize(),
+                    success: function (data) {
+                        html = '';
+                        $.each(JSON.parse(data), function (index, content) {
+                            html += '<div class="col-sm-3 urls">' +
+                                '<div class="panel panel-primary">' +
+                                '<div class="panel-heading">' + content.classify__type_name + '</div>' +
+                                '<div class="panel-body"><a href="' + content.url_link + '" target="_blank">' + content.url_name + '</a></div>' +
+                                '<div class="panel-footer"><p><img class="edit" src="{% static 'icon/edit16.png' %}" data-toggle="modal" data-target="#editurl">'+
+                                '<img class="delete" src="{% static 'icon/delete16.png' %}"></p></div></div></div>';
+                        });
+                        $('.row').html(html);
+                        console.log("................");
+                        waterfall();
+                    },
+                });
+        };
+
+        function addUrl() {
+            getClassify2();
+            $.ajax({
+                type: 'post',
+                url: '{% url 'addurl' %}',
+                data: $('.add-from').serialize(),
+                success: function (data) {
+                    html = '';
+                    $.each(JSON.parse(data), function (index, content) {
+                        alert(content.messages);
+                    });
+                    $('#addurl').modal('hide');
+                    getUrlsByGetMethod();
+                },
+            });
+        };
+
+
+        function addClassify() {
+            $.ajax({
+                type: 'post',
+                url: '{% url 'addclassify' %}',
+                data: $('.add-from').serialize(),
+                success: function (data) {
+                    $.each(JSON.parse(data), function (index, content) {
+                        alert(content.messages);
+                    });
+                    $('#addclassify').modal('hide');
+                    getClassify();
+                    getClassify2();
+                    getUrlsByGetMethod();
+                    waterfall();
+                },
+            });
+        };
+
+        function waterfall() {
+            $('.row').masonry({
+                itemSelector: '.urls',
+            });
+        };
+        
+        $('.edit').click(function () {
+            
+        })
+
+
+    </script>
+
+{% endblock %}
