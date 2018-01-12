@@ -1,4 +1,3 @@
-
 hr {
     height: 2px;
     border: none;
@@ -36,6 +35,10 @@ hr {
     margin-bottom: 5px;
 }
 
+.panel-footer {
+    height: 36px;
+}
+
 .panel-footer > p {
     display: block;
     float: right;
@@ -53,5 +56,18 @@ hr {
 
 footer {
     clear: both;
+    height: 50px;
+}
+
+.footer > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer > ul > li {
+    margin-right: 10px;
+    float: left;
+    display: block;
 }
 
