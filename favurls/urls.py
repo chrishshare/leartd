@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^geturls', views.search_user_urls, name='geturls'),
     url(r'^addurl', views.add_url, name='addurl'),
     url(r'^addclassify', views.add_classify, name='addclassify'),
+    url(r'^delurl', views.del_url, name='delurl'),
+    url(r'^delclassify', views.del_classify, name='delclassify'),
 ]

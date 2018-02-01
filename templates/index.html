@@ -238,6 +238,22 @@
             },
         });
     };
+    
+    
+    function del_url() {
+        $.ajax({
+            type: 'post',
+            url: '{% url 'delurl' %}',
+        });
+    }
+
+
+    function del_classify() {
+        $.ajax({
+            type: 'post',
+            url: '{% url 'delclassify' %}',
+        });
+    }
 
     function waterfall() {
         $('.row').masonry({

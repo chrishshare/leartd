@@ -71,6 +71,7 @@ def search_user_urls(request):
         pass
 
 
+@login_required(login_url='/accounts/login/')
 def add_url(request):
     if get_session(request) is not None:
         if request.method == 'POST':
@@ -93,6 +94,7 @@ def add_url(request):
             return HttpResponse(result)
 
 
+@login_required(login_url='/accounts/login/')
 def add_classify(request):
     if get_session(request) is not None:
         if request.method == 'POST':
@@ -118,3 +120,17 @@ def get_session(request):
         return {'id': id, 'username': username}
     else:
         return None
+
+
+@login_required(login_url='/accounts/login/')
+def del_classify(request):
+    if get_session(request) is not None:
+        if request.method == 'POST':
+            url_name = request.POST.get('typecode')
+
+    pass
+
+
+@login_required(login_url='/accounts/login/')
+def del_url(request):
+    pass
