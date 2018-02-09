@@ -54,4 +54,11 @@ def joinUrl(menutype, action, accesstoken):
     return url
 
 
+def gettextmessage(request):
+    if request.method == 'POST':
+
+        print(request.POST)
+    return None
+
+
 

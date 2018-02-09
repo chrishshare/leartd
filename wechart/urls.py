@@ -18,5 +18,6 @@ from wechart import views
 
 urlpatterns = [
     url(r'$', views.check_signature, name='weixin'),
+    url(r'getmsg/$', views.gettextmessage, name='getmsg'),
 
 ]
