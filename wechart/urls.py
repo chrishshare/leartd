@@ -17,6 +17,6 @@ from django.conf.urls import url
 from wechart import views
 
 urlpatterns = [
-    url(r'^$', views.check_signature, name='weixin'),
+    url(r'$', views.check_signature, name='weixin'),
 
 ]

@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('favurls.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^', include('wechart.urls')),
+    url(r'^wx', include('wechart.urls')),
 ]

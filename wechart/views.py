@@ -36,7 +36,7 @@ grant_type = 'client_credential'
 baseUrl = 'https://api.weixin.qq.com/cgi-bin/'
 
 
-def getAccessToken():
+def getAccessToken(request):
     ' 获取微信的accesstoken信息 '
     # token?grant_type = client_credential & appid = APPID & secret = APPSECRET
     url = baseUrl + 'token?grant_type = ' + grant_type + ' & appid =' + AppId + ' & secret = ' + secret
