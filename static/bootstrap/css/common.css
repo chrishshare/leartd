@@ -52,6 +52,7 @@ hr {
 
 .delete {
     display: block;
+    float: right;
 }
 
 footer {
