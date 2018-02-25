@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'favurls.apps.FavurlsConfig',
     'wechart.apps.WechartConfig',
+    'pmp.apps.PmpConfig',
+    'softwaretest.apps.SoftwaretestConfig',
     'registration',
     'django.contrib.sites',
 ]

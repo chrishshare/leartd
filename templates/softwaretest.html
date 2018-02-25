@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}ISTQB(软件测试)术语表{% endblock %}
+{% block content %}
+    <form class="form-group form-horizontal">{% csrf_token %}
+    <div>
+        <select class="input-sm" name="option_value">
+            <option value="select_type">请选择搜索类型</option>
+            <option value="short">缩写</option>
+            <option value="long_EN">英文全称</option>
+            <option value="long_CN">中文全称</option>
+            <option value="description">描述</option>
+            <option value="keyword">关键字</option>
+        </select>
+        <input type="text" class="input-sm" name="search_text" placeholder="请输入搜索关键字（不分大小写）" style="width: 250px">
+        <button type="button" class="btn btn-sm btn-primary" onclick="searchSoftwareTest('post')">查询</button>
+    </div>
+
+    </form>
+    <div class="pmp-table">
+    <table class="table table-bordered">
+        <caption>ISTQB(软件测试)术语表</caption>
+        <thead>
+        <tr>
+            <th>英文全称</th>
+            <th>英文缩写</th>
+            <th>中文全称</th>
+            <th>术语解释</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    </div>
+
+
+
+    <script type="text/javascript" src="{% static 'bootstrap/js/istqb.js' %}"></script>
+
+
+
+{% endblock %}
