@@ -14,7 +14,7 @@ def pmp_keywords_view(request):
 
 def search_pmp_keywords_list(request):
     if request.method == 'GET':
-        qryset = PMPDescription.objects.values('long_EN', 'short', 'long_CN', 'description', 'version')
+        qryset = PMPDescription.objects.filter(version__contains='第六版').values('long_EN', 'short', 'long_CN', 'description', 'version')
         qryset.order_by('long_EN')
         result = json.dumps(list(qryset), cls=DjangoJSONEncoder, ensure_ascii=False)
         print(result)
@@ -24,16 +24,16 @@ def search_pmp_keywords_list(request):
         option_value = request.POST.get('option_value')
         search_text = request.POST.get('search_text')
         if option_value == 'long_EN':
-            qryset = PMPDescription.objects.filter(long_EN__contains=search_text).values('long_EN', 'short', 'long_CN',
+            qryset = PMPDescription.objects.filter(long_EN__contains=search_text, version__contains='第六版').values('long_EN', 'short', 'long_CN',
                                                                                          'description', 'version')
         elif option_value == 'short':
-            qryset = PMPDescription.objects.filter(short=search_text).values('long_EN', 'short', 'long_CN',
+            qryset = PMPDescription.objects.filter(short=search_text, version__contains='第六版').values('long_EN', 'short', 'long_CN',
                                                                                          'description', 'version')
         elif option_value == 'long_CN':
-            qryset = PMPDescription.objects.filter(long_CN__contains=search_text).values('long_EN', 'short', 'long_CN',
+            qryset = PMPDescription.objects.filter(long_CN__contains=search_text, version__contains='第六版').values('long_EN', 'short', 'long_CN',
                                                                              'description', 'version')
         else:
-            qryset = PMPDescription.objects.filter(description__contains=search_text).values('long_EN', 'short', 'long_CN',
+            qryset = PMPDescription.objects.filter(description__contains=search_text, version__contains='第六版').values('long_EN', 'short', 'long_CN',
                                                                                'description', 'version')
         qryset.order_by('long_EN')
         result = json.dumps(list(qryset), cls=DjangoJSONEncoder, ensure_ascii=False)
