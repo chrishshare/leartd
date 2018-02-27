@@ -72,3 +72,66 @@ footer {
     display: block;
 }
 
+
+caption {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nodata {
+    display: none;
+}
+
+
+.loader {
+   background:#4ea980;
+   text-indent: -9999em;
+   position: relative;
+   width: 200px;
+   height: 200px;
+   box-shadow: inset 0 0 0 15px #FFF;
+   border-radius: 50%;
+}
+.loader::before {
+   position: absolute;
+   content: '';
+   width: 100px;
+   height: 200px;
+   background: #4ea980;
+
+   /*半圆*/
+   border-radius: 0 200px 200px 0;
+   left: 100px;
+
+   /*原点从（0,0）移至圆心处（0,100），绕圆心旋转*/
+   transform-origin: 0px 100px;
+   animation: load-effect 2s infinite linear;
+}
+
+/*最上层（即::before之前）绘制透明白色圆环*/
+.loader::after {
+   position: absolute;
+   content: '';
+   width: 200px;
+   height: 200px;
+   border-radius: 50%;
+   left: 0;
+   box-shadow: inset 0 0 0 15px rgba(255,255,255,.2);
+}
+
+/*动画：旋转360°*/
+@keyframes load-effect {
+   0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+   }
+   100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+   }
+}
+
+
+

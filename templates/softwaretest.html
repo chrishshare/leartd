@@ -12,7 +12,7 @@
             <option value="description">描述</option>
             <option value="keyword">关键字</option>
         </select>
-        <input type="text" class="input-sm" name="search_text" placeholder="请输入搜索关键字（不分大小写）" style="width: 250px">
+        <input type="text" class="input-sm search_text" name="search_text" placeholder="请输入搜索关键字（不分大小写）" required style="width: 250px">
         <button type="button" class="btn btn-sm btn-primary" onclick="searchSoftwareTest('post')">查询</button>
     </div>
 
@@ -29,6 +29,7 @@
         </tr>
         </thead>
         <tbody>
+            <div class="loader">Loading...</div>
 
         </tbody>
     </table>

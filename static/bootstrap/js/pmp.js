@@ -16,16 +16,24 @@ function search_pmp(method) {
             }
         })
     }else if(method === 'post'){
-        $.ajax({
-            type: 'post',
-            url: '/pmp/searchpmpkeywordslist/',
-            data: $('form').serialize(),
-            success:function (data) {
-                $.each(JSON.parse(data), function (index, content) {
-                    createElement(content)
-                })
-            }
-        })
+        search_text = $('.search_text').val();
+        if(search_text.length ===0 ){
+            alert('请输入搜索关键字');
+        }else{
+            $.ajax({
+                type: 'post',
+                url: '/pmp/searchpmpkeywordslist/',
+                data: $('form').serialize(),
+                success:function (data) {
+                    console.log(data.length);
+                    $.each(JSON.parse(data), function (index, content) {
+                        createElement(content)
+                    })
+                }
+            })
+        }
+
+
     }else{
 
     }

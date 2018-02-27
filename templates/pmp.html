@@ -11,7 +11,7 @@
             <option value="long_CN">中文全称</option>
             <option value="description">描述</option>
         </select>
-        <input type="text" class="input-sm" name="search_text" placeholder="请输入搜索关键字（不分大小写）" style="width: 250px">
+        <input type="text" class="input-sm search_text" name="search_text" placeholder="请输入搜索关键字（不分大小写）" required style="width: 250px">
         <button type="button" class="btn btn-sm btn-primary" onclick="search_pmp('post')">查询</button>
     </div>
 
@@ -28,11 +28,14 @@
         </tr>
         </thead>
         <tbody>
-
+            <div class="loader">Loading...</div>
+{#            <div class="nodata">查询结果为空</div>#}
         </tbody>
+
     </table>
 
     </div>
+
 
 
 
