@@ -163,7 +163,7 @@ LOGGING = {
 # 设置多媒体文件上传保存路径
 MEDIA_URL = "/static/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "static/media/")
-
+CKEDITOR_UPLOAD_PATH = "ckmedia"
 # session超时策略
 SESSION_COOKIE_AGE = 60*60*24*30  # 30分钟。
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -190,4 +190,24 @@ LOGIN_REDIRECT_URL = '/'
 REGISTRATION_USE_SITE_EMAIL = True
 REGISTRATION_SITE_USER_EMAIL = REGISTRATION_DEFAULT_FROM_EMAIL
 SITE_ID = 1
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': (
+            ['div','Source','-','Save','NewPage','Preview','-','Templates'],
+            ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],
+            ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+            ['Form','Checkbox','Radio','TextField','Textarea','Select','Button', 'ImageButton','HiddenField'],
+            ['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],
+            ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+            ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+            ['Link','Unlink','Anchor'],
+            ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+            ['Styles','Format','Font','FontSize'],
+            ['TextColor','BGColor'],
+            ['Maximize','ShowBlocks','-','About', 'pbckcode'],
+        ),
+    }
+}
 

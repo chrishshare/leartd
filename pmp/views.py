@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from favurls.views import get_session
-from pmp.models import PMPDescription
+from pmp.models import PMPDescription, AboutMe, Declare
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.http.response import HttpResponse
@@ -41,3 +41,25 @@ def search_pmp_keywords_list(request):
         return HttpResponse(result)
 
 
+def about_view(request):
+    if get_session(request) is not None:
+        username = get_session(request).get('username')
+    return render(request, 'about.html', locals())
+
+
+def get_about_list(request):
+    about_list = AboutMe.objects.all().values('photo', 'peer', 'email', 'summary', 'lastupdate')
+    result = json.dumps(list(about_list), cls=DjangoJSONEncoder, ensure_ascii=False)
+    return HttpResponse(result)
+
+
+def declare_view(request):
+    if get_session(request) is not None:
+        username = get_session(request).get('username')
+    return render(request, 'declare.html', locals())
+
+
+def get_declare_list(request):
+    declare_list = Declare.objects.all().values('content', 'wechar', 'zifubao', 'lastupdate')
+    result = json.dumps(list(declare_list), cls=DjangoJSONEncoder, ensure_ascii=False)
+    return HttpResponse(result)

@@ -1,5 +1,7 @@
 $(document).ajaxStart(function () {
-    $('.loader').show();
+    $('.loading-tfoot').show();
+    $('.loading').show();
 }).ajaxStop(function () {
-    $('.loader').hide();
+    $('.loading').hide();
+    $('.loading-tfoot').hide();
 })

@@ -19,5 +19,9 @@ from pmp import views
 urlpatterns = [
     url(r'^$', views.pmp_keywords_view, name='pmp'),
     url(r'^searchpmpkeywordslist', views.search_pmp_keywords_list, name='searchpmpkeywordslist'),
+    url(r'^aboutview', views.about_view, name='aboutview'),
+    url(r'^aboutlist', views.get_about_list, name='aboutlist'),
+    url(r'^declareview', views.declare_view, name='declareview'),
+    url(r'^declarelist', views.get_declare_list, name='declarelist'),
 
 ]
