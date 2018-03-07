@@ -20,7 +20,7 @@ def index_view(request):
 def get_url_classify(request):
     """ 获取当前登陆用户的url分类 """
     if get_session(request) is not None:
-        result = UrlClassify.objects.all().values('type_code', 'type_name')
+        result = UrlClassify.objects.all().values('id', 'type_name')
         json_data = queryset_to_json(result)
         return HttpResponse(json_data)
     else:
@@ -40,16 +40,16 @@ def search_user_urls(request):
                                                    url_name__contains=url_name).values(
                     'url_name',
                     'url_link',
-                    'classify__type_code',
+                    'classify_id',
                     'classify__type_name',
                     'note')
             else:
                 result = UrlManager.objects.filter(creator__username=username,
                                                    url_name__contains=url_name,
-                                                   classify__type_code=type_code).values(
+                                                   classify_id=type_code).values(
                     'url_name',
                     'url_link',
-                    'classify__type_code',
+                    'classify_id',
                     'classify__type_name',
                     'note')
 
@@ -60,7 +60,7 @@ def search_user_urls(request):
             result = UrlManager.objects.filter(creator__username=get_session(request).get('username')).values(
                 'url_name',
                 'url_link',
-                'classify__type_code',
+                'classify_id',
                 'classify__type_name',
                 'note')
 
@@ -79,7 +79,7 @@ def add_url(request):
             url_link = request.POST.get('urllink')
             url_name = request.POST.get('urlname')
             classify_id = request.POST.get('urltype')
-            type_code = UrlClassify.objects.get(type_code=classify_id)
+            type_code = UrlClassify.objects.get(id=int(classify_id))
             remark = request.POST.get('remark')
             user = User.objects.get(username=get_session(request).get('username'))
             # createtime = now()
@@ -98,13 +98,13 @@ def add_url(request):
 def add_classify(request):
     if get_session(request) is not None:
         if request.method == 'POST':
-            type_code = request.POST.get('typecode')
+            # type_code = request.POST.get('typecode')
             type_name = request.POST.get('typename')
             user = User.objects.get(username=get_session(request).get('username'))
             # createtime = now()
 
             try:
-                UrlClassify.objects.create(type_code=type_code, type_name=type_name, creator=user)
+                UrlClassify.objects.create(type_name=type_name, creator=user)
                 result = json.dumps([{'message_code': '0', 'messages': 'URL分类增加成功'}], cls=DjangoJSONEncoder, ensure_ascii=False)
             except:
                 result = json.dumps([{'message_code': '-1', 'messages': 'URL分类增加失败'}], cls=DjangoJSONEncoder, ensure_ascii=False)

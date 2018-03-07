@@ -3,7 +3,7 @@ from favurls.models import UrlClassify, UrlManager
 
 
 class UrlClassifyAdmin(admin.ModelAdmin):
-    list_display = ('type_code', 'type_name', 'creator')
+    list_display = ('type_name', 'creator')
     search_fields = ('type_name', )
 
 

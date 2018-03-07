@@ -90,7 +90,7 @@ function getClassify(act) {
             success: function (data) {
                 html = '<option value="">请选择</option>';
                 $.each(JSON.parse(data), function (index, content) {
-                    html += ' <option value="' + content.type_code + '">' +
+                    html += ' <option value="' + content.id + '">' +
                         content.type_name + '</option>';
                 });
                 $('.classify-code').html(html);
@@ -103,7 +103,7 @@ function getClassify(act) {
             success: function (data) {
                 html = '<option value="">请选择</option>';
                 $.each(JSON.parse(data), function (index, content) {
-                    html += ' <option value="' + content.type_code + '">' +
+                    html += ' <option value="' + content.id + '">' +
                         content.type_name + '</option>';
                 });
                 $('.url-type').html(html);

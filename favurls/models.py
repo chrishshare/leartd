@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class UrlClassify(models.Model):
     """ URL分类 """
-    type_code = models.CharField(max_length=20, primary_key=True, verbose_name='url分类编码')
+    # type_code = models.CharField(max_length=20, primary_key=True, verbose_name='url分类编码')
     type_name = models.CharField(max_length=40, unique=True, verbose_name='url分类名称')
     creator = models.ForeignKey(User, verbose_name='创建人')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')

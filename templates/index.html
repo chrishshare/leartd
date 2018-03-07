@@ -54,6 +54,7 @@
                                 <select required class="input-sm url-type" name="urltype" style="width: 70%">
                                     <option value="">请选择</option>
                                 </select>
+                                <button  type="button" class="btn-sm btn-primary add-url" data-toggle="modal" data-target="#addclassify">+</button>
                             </div>
                             <div>
                                 <label for="remark">备&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp注:</label>
@@ -80,11 +81,11 @@
                     </div>
                     <div class="modal-body" style="padding-left: 10%">
                         <form class="form-inline form-group-lg add-from">{% csrf_token %}
-                            <div>
-                                <label for="type-code">分类编码:</label>
-                                <input type="url" class="type-code input-sm" name="typecode" placeholder=" 请输入URL分类编码"
-                                       required maxlength="20" style="width: 70%">
-                            </div>
+{#                            <div>#}
+{#                                <label for="type-code">分类编码:</label>#}
+{#                                <input type="url" class="type-code input-sm" name="typecode" placeholder=" 请输入URL分类编码"#}
+{#                                       required maxlength="20" style="width: 70%">#}
+{#                            </div>#}
                             <div>
                                 <label for="type-name">分类名称:</label>
                                 <input type="url" class="type-name input-sm" name="typename" placeholder=" 请输入URL分类名称"
@@ -102,11 +103,11 @@
         </div>
 
         <div class="right-bar">
-            <div>
-                <button type="button" class="btn-sm btn-primary add-url" data-toggle="modal" data-target="#addclassify">
-                    增加分类
-                </button>
-            </div>
+{#            <div>#}
+{#                <button type="button" class="btn-sm btn-primary add-url" data-toggle="modal" data-target="#addclassify">#}
+{#                    增加分类#}
+{#                </button>#}
+{#            </div>#}
             <div>
                 <button type="button" class="btn-sm btn-primary add-url" data-toggle="modal" data-target="#addurl">
                     增加URL
