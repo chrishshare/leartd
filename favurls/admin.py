@@ -15,3 +15,6 @@ class UrlManagerAdmin(admin.ModelAdmin):
 
 admin.site.register(UrlClassify, UrlClassifyAdmin)
 admin.site.register(UrlManager, UrlManagerAdmin)
+
+admin.site.site_header = '速易捷后台管理'
+admin.site.site_title = '速易捷'
