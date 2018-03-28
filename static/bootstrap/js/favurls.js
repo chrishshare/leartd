@@ -40,7 +40,7 @@ function createUrlsElement(content) {
 
     var panelFooter_delimg = $('<img>');
     panelFooter_delimg.addClass("delete");
-    panelFooter_delimg.attr({"src":"static/icon/delete16.png", "onclick":"del_url()" });
+    panelFooter_delimg.attr({"src":"static/icon/delete16.png"});
     $(panelFooter_delimg).appendTo(panelFooter_p);
 
 }
@@ -58,8 +58,6 @@ function getUrls(type) {
                 $.each(JSON.parse(data), function (index, content) {
                         createUrlsElement(content);
                     });
-
-
                 waterfall();
             },
         });
@@ -153,10 +151,33 @@ function addClassify() {
 
 
 //删除url
-function del_url() {
+$('body').on("click", '.delete', function () {
+    var url_name = $(this).parents("div.panel-footer").prevAll("div.panel-body").children("a.urls_link").text();
+    var url_link = $(this).parents("div.panel-footer").prevAll("div.panel-body").children("a.urls_link").attr("href");
     $.ajax({
         type: 'post',
         url: '/delurl/',
+        data: {"url_name": url_name, "url_link": url_link},
+        success: function (data) {
+            $.each(JSON.parse(data), function (index, content) {
+                alert(content.retmsg);
+                getUrls('get');
+            })
+        }
+    })
+
+})
+function del_url() {
+    console.log($(this));
+    $.ajax({
+        type: 'post',
+        url: '/delurl/',
+        data: $(this),
+        success: function (data) {
+            $.each(JSON.parse(data), function (index, content) {
+                
+            })
+        }
     });
 }
 

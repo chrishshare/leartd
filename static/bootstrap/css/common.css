@@ -119,6 +119,10 @@ caption {
 }
 
 
+.add-from > div {
+    margin-bottom: 10px;
+}
+
 .loader {
    background:#4ea980;
    text-indent: -9999em;

@@ -17,7 +17,10 @@ from django.conf.urls import url
 from wechart import views
 
 urlpatterns = [
-    url(r'$', views.check_signature, name='weixin'),
-    url(r'getmsg/$', views.gettextmessage, name='getmsg'),
+    # url(r'$', views.check_signature, name='weixin'),
+    url(r'$', views.wei_xin, name='weixin_plugin'),
+    url(r'replymsg/$', views.reply_message, name='replymsg'),
+    url(r'gettoken/$', views.getAccessToken, name='gettoken'),
+    url(r'createmenu/$', views.create_menu, name='createmenu'),
 
 ]

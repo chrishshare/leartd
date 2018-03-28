@@ -4,6 +4,7 @@
 {% block content %}
 
     {% if username %}
+{#        search#}
         <div class="search-form container-fluid">
             <form class="form-horizontal search-from" method="post">
                 {% csrf_token %}
@@ -81,11 +82,6 @@
                     </div>
                     <div class="modal-body" style="padding-left: 10%">
                         <form class="form-inline form-group-lg add-from">{% csrf_token %}
-{#                            <div>#}
-{#                                <label for="type-code">分类编码:</label>#}
-{#                                <input type="url" class="type-code input-sm" name="typecode" placeholder=" 请输入URL分类编码"#}
-{#                                       required maxlength="20" style="width: 70%">#}
-{#                            </div>#}
                             <div>
                                 <label for="type-name">分类名称:</label>
                                 <input type="url" class="type-name input-sm" name="typename" placeholder=" 请输入URL分类名称"

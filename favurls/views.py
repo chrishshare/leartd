@@ -128,9 +128,28 @@ def del_classify(request):
         if request.method == 'POST':
             url_name = request.POST.get('typecode')
 
+
     pass
 
 
 @login_required(login_url='/accounts/login/')
 def del_url(request):
-    pass
+    if get_session(request) is not None:
+        if request.method == 'POST':
+            url_link = request.POST.get('url_link')
+            url_name = request.POST.get('url_name')
+            userid = User.objects.get(id=request.session.get('_auth_user_id'))
+            print(request.POST)
+            result = UrlManager.objects.filter(url_link=url_link, url_name=url_name, creator=userid).delete()
+            if result[0] == 1:
+                result_message = [{'retcode': 1, 'retmsg': '删除成功'}]
+                return HttpResponse(json.dumps(result_message, cls=DjangoJSONEncoder, ensure_ascii=False))
+            else:
+                result_message = [{'retcode': 1, 'retmsg': '删除失败'}]
+                return HttpResponse(json.dumps(result_message, cls=DjangoJSONEncoder, ensure_ascii=False))
+        else:
+            result_message = [{'retcode': 1, 'retmsg': '暂不支持该功能'}]
+            return HttpResponse(json.dumps(result_message, cls=DjangoJSONEncoder, ensure_ascii=False))
+
+
+
