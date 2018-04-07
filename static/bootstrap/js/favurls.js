@@ -9,7 +9,7 @@ $(document).ready(function () {
 //创建url列表相关元素
 function createUrlsElement(content) {
     var urls = $('<div></div>');
-    urls.addClass("col-sm-3 urls");
+    urls.addClass("col-lg-3 col-md-4 col-sm-6 col-sx-12 urls");
     $('.row').append(urls);
 
     var panel = $('<div></div>');

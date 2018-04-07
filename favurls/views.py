@@ -16,6 +16,14 @@ def index_view(request):
     return render(request, 'index.html', locals())
 
 
+def url_manager_view(request):
+    """ 首页渲染，必须登陆才能查询url信息，否则提示需要登陆，默认显示广告(o^o) """
+    if get_session(request) is not None:
+        username = get_session(request).get('username')
+    # classify_list = get_url_classify(request)
+    return render(request, 'urlmanager.html', locals())
+
+
 @login_required(login_url='/accounts/login/')
 def get_url_classify(request):
     """ 获取当前登陆用户的url分类 """

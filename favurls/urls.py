@@ -18,7 +18,8 @@ from favurls import views
 
 urlpatterns = [
     url(r'^$', views.index_view, name='index'),
-    url(r'^getclassify', views.get_url_classify, name='getclassify'),
+    url(r'^urlmanager', views.url_manager_view, name='urlmanager'),
+    url(r'^getclassify/$', views.get_url_classify, name='getclassify'),
     url(r'^geturls', views.search_user_urls, name='geturls'),
     url(r'^addurl', views.add_url, name='addurl'),
     url(r'^addclassify', views.add_classify, name='addclassify'),
