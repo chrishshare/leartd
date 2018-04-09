@@ -5,4 +5,4 @@ RUN mkdir /leartd/dockermysql
 WORKDIR /leartd
 ADD requirements.txt /leartd/
 RUN pip install -r requirements.txt
-ADD . /leartd/s
+ADD . /leartd/
