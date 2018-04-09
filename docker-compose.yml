@@ -20,6 +20,6 @@ services:
                 volumes:
                         - .:/leartd
                 ports:
-                        - "8080:9000"
+                        - "8089:9000"
                 depends_on:
                         - db
