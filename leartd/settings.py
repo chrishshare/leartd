@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'leartd',
         'USER': 'root',
         'PASSWORD': '@Zhsy08241128*',
-        'HOST': 'db',
+        'HOST': 'db2',
     }
 }
 
